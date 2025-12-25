@@ -1,0 +1,295 @@
+:root {
+  --bg-main: #0f0b1e;
+  --bg-secondary: #1a1433;
+
+  --card-bg: rgba(255, 255, 255, 0.04);
+
+  --text-primary: #f3f1ff;
+  --text-secondary: #b9b6d3;
+
+  --accent-moon: #e6e2ff;
+  --accent-lavender: #9b8cff;
+  --accent-gold: #f5d98a;
+
+  --border-soft: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(
+      circle at top,
+      #1a1433 0%,
+      #0f0b1e 60%
+  );
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 720px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+h1 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 2.6rem;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  color: var(--accent-moon);
+  text-shadow:
+    0 0 12px rgba(230, 226, 255, 0.25),
+    0 0 24px rgba(155, 140, 255, 0.12);
+  margin-bottom: 48px;
+}
+
+h2 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-gold);
+}
+
+.post-preview {
+  padding: 28px 28px;
+  margin-bottom: 32px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.post-preview p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.post-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-link * {
+  pointer-events: none;
+}
+
+.content {
+  margin-top: 48px;
+  font-family: "Playfair Display", serif;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: var(--text-primary);
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  margin-top: 2.2em;
+}
+
+.content code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
+.content pre {
+  background: #0b0816;
+  padding: 20px;
+  border-radius: 16px;
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+.content {
+  color: var(--text-primary);
+}
+
+.content p {
+  color: #e6e2ff;  
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.4em;
+  letter-spacing: 0.2px;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  color: var(--accent-moon);
+}
+
+.content h2 {
+  margin-top: 2.5em;
+}
+
+.content a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+.content ul,
+.content ol {
+  margin-left: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.content li {
+  margin-bottom: 0.4em;
+}
+
+.content hr {
+  border: none;
+  height: 1px;
+  margin: 48px 0;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(230, 226, 255, 0.4),
+    transparent
+  );
+}
+
+/* ADMIN DASHBOARD */
+.admin-container {
+  max-width: 720px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+
+/* Admin heading */
+.admin-container h1 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--accent-moon);
+  margin-bottom: 32px;
+}
+
+/* New post link */
+.admin-new {
+  display: inline-block;
+  margin-bottom: 48px;
+  color: var(--accent-lavender);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.admin-new:hover {
+  text-decoration: underline;
+}
+
+/* Admin post list */
+.admin-post {
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(6px);
+}
+
+.admin-post h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.admin-post p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+
+/* Admin actions */
+.admin-actions {
+  margin-top: 14px;
+}
+
+.admin-actions a,
+.admin-actions button {
+  font-size: 0.8rem;
+  margin-right: 16px;
+  color: var(--accent-gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-actions button {
+  color: #ff8c8c;
+}
+
+/* POST FORM (EDITOR) */
+
+.post-form input,
+.post-form textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.post-form textarea {
+  font-family: "Playfair Display", serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.post-form input::placeholder,
+.post-form textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.publish-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.publish-toggle input {
+  margin: 0;
+  transform: translateY(1px);
+}
+
+.post-form button {
+  background: none;
+  border: 1px solid var(--border-soft);
+  padding: 10px 22px;
+  border-radius: 999px;
+  color: var(--accent-moon);
+  cursor: pointer;
+}
+
+.post-form button:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
