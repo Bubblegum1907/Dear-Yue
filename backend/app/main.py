@@ -5,9 +5,9 @@ from sqlalchemy.orm import Session
 
 from app.database import engine, Base, SessionLocal
 from app.routes import posts, auth
-from app.auth import get_password_hash
+from app.routes.auth import get_password_hash
 
-from app.models.posts import Post, User 
+from app.models.post import Post, User 
 
 app = FastAPI(title="Blog API")
 
