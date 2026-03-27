@@ -15,7 +15,7 @@ export default function PostForm({ post, onSave }) {
     >
       <input
         name="title"
-        placeholder="Title"
+        placeholder="Title of this memory..."
         defaultValue={post?.title}
         required
       />
@@ -24,19 +24,24 @@ export default function PostForm({ post, onSave }) {
         name="content"
         rows={16}
         defaultValue={post?.content}
-        placeholder="Write..."
+        placeholder="Begin writing..."
       />
 
-      <label className="publish-toggle">
-      <input
-          type="checkbox"
-          name="is_published"
-          defaultChecked={post?.is_published}
-      />
-      <span>Published</span>
-      </label>
+      {/* This container pushes Save to the left and Published to the right */}
+      <div className="editor-footer">
+        <button type="submit">
+          Save
+        </button>
 
-      <button type="submit">Save</button>
+        <label className="publish-toggle">
+          <input
+            type="checkbox"
+            name="is_published"
+            defaultChecked={post?.is_published}
+          />
+          <span>Published</span>
+        </label>
+      </div>
     </form>
   );
 }

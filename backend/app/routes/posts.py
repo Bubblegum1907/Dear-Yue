@@ -9,7 +9,7 @@ from app.services.slug import slugify
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
-# Get all published posts
+# Get all posts (public and drafts)
 @router.get("/")
 def get_posts(db: Session = Depends(get_db)):
     posts = (
@@ -32,7 +32,7 @@ def get_posts(db: Session = Depends(get_db)):
     ]
 
 # Get single post by slug
-@router.get("/{slug}")
+@router.get("/{slug}/")
 def get_post(slug: str, db: Session = Depends(get_db)):
     post = (
         db.query(Post)
@@ -53,7 +53,6 @@ def get_post(slug: str, db: Session = Depends(get_db)):
         "rendered_content": render_markdown(post.content),
         "read_time": estimate_read_time(post.content),
     }
-
 
 # Create post (admin only)
 @router.post("/", response_model=PostOut, dependencies=[Depends(verify_admin)])
@@ -77,7 +76,7 @@ def create_post(post: PostCreate, db: Session = Depends(get_db)):
     return db_post
 
 # Update post (admin only)
-@router.put("/{slug}", response_model=PostOut, dependencies=[Depends(verify_admin)])
+@router.put("/{slug}/", response_model=PostOut, dependencies=[Depends(verify_admin)])
 def update_post(slug: str, data: PostUpdate, db: Session = Depends(get_db)):
     post = db.query(Post).filter(Post.slug == slug).first()
 
@@ -99,7 +98,7 @@ def update_post(slug: str, data: PostUpdate, db: Session = Depends(get_db)):
     return post
 
 # Delete post (admin only)
-@router.delete("/{slug}", dependencies=[Depends(verify_admin)])
+@router.delete("/{slug}/", dependencies=[Depends(verify_admin)])
 def delete_post(slug: str, db: Session = Depends(get_db)):
     post = db.query(Post).filter(Post.slug == slug).first()
 

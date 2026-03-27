@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.routes import posts
+from app.routes import auth
 
 app = FastAPI(title="Blog API")
 
@@ -10,6 +11,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://dear-yue-production.up.railway.app",
         "https://dear-yue.vercel.app",
     ],
     allow_credentials=True,
@@ -20,6 +22,7 @@ app.add_middleware(
 Base.metadata.create_all(bind=engine)
 
 app.include_router(posts.router)
+app.include_router(auth.router)
 
 @app.get("/")
 def root():

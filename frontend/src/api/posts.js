@@ -10,6 +10,6 @@ export const fetchPosts = async () => {
 };
 
 export const fetchPostBySlug = async (slug) => {
-  const res = await API.get(`/posts/${slug}`);
+  const res = await API.get(`/posts/${slug}/`);
   return res.data;
 };

@@ -1,25 +1,27 @@
-import axios from "axios";
+import axios from 'axios';
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-const ADMIN_KEY = import.meta.env.VITE_ADMIN_KEY;
+API.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-export const createPost = (data) =>
-  API.post("/posts/", data, {
-    headers: { "X-ADMIN-KEY": ADMIN_KEY },
-  });
+export const getAdminPosts = () => API.get('/posts/');
+export const createPost = (data) => API.post('/posts/', data);
+export const updatePost = (slug, data) => API.put(`/posts/${slug}/`, data);
+export const deletePost = (slug) => API.delete(`/posts/${slug}/`);
+export const publishPost = (slug) => API.put(`/posts/${slug}/`, { is_published: true });
 
-export const updatePost = (slug, data) =>
-  API.put(`/posts/${slug}`, data, {
-    headers: { "X-ADMIN-KEY": ADMIN_KEY },
-  });
-
-export const deletePost = (slug) =>
-  API.delete(`/posts/${slug}`, {
-    headers: { "X-ADMIN-KEY": ADMIN_KEY },
-  });
-
-export const fetchAllPosts = () =>
-  API.get("/posts/");
+export const login = (password) => {
+    const formData = new FormData();
+    formData.append('username', 'admin'); 
+    formData.append('password', password);
+    
+    return API.post('/login/', formData);
+};
