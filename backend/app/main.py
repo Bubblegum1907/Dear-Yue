@@ -5,8 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.database import engine, Base, SessionLocal
 from app.routes import posts, auth
-from app.routes.auth import get_password_hash
-
+from app.services.auth import get_password_hash
 from app.models.post import Post, User 
 
 app = FastAPI(title="Blog API")
@@ -31,7 +30,6 @@ def seed_admin():
     """Automatically creates the 'admin' user if it doesn't exist."""
     db = SessionLocal()
     try:
-        # Check if an admin already exists in the 'users' table
         admin = db.query(User).filter(User.username == "admin").first()
         
         if not admin:
