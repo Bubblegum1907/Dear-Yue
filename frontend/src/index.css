@@ -528,18 +528,3 @@ a:hover {
 .btn-moonlight-action:active {
   transform: translateY(0);
 }
-
-/* This class only applies to the Admin version of the card */
-.admin-post-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-right: 85px; 
-}
-
-.admin-post-title {
-  margin: 0;
-  word-wrap: break-word;
-  line-height: 1.4;
-}
