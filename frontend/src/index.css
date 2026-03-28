@@ -92,6 +92,10 @@ a:hover {
   pointer-events: none;
 }
 
+.post-title {
+  padding-right: 80px;
+}
+
 .content {
   color: var(--text-primary);
 }
