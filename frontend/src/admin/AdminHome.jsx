@@ -25,7 +25,6 @@ export default function AdminHome() {
 
   const handleTogglePublish = async (slug, currentStatus) => {
     try {
-      // Assuming updatePost handles partial updates for is_published
       await updatePost(slug, { is_published: !currentStatus });
       setPosts((prev) =>
         prev.map((p) => (p.slug === slug ? { ...p, is_published: !currentStatus } : p))
@@ -59,7 +58,6 @@ export default function AdminHome() {
 
   return (
     <div className="admin-container">
-      {/* Top Header Row with Logout at the original right side */}
       <header style={{ 
         display: 'flex', 
         justifyContent: 'space-between', 
@@ -86,26 +84,51 @@ export default function AdminHome() {
         )}
 
         {posts.map((post) => (
-          <div key={post.id} className="admin-post" style={{ position: 'relative' }}>
+          <div key={post.id} className="admin-post" style={{ position: 'relative', paddingBottom: '1.5rem' }}>
             
-            {/* Corner Status Toggle (Publish/Live) */}
-            <button 
-              className={`btn-status-glow ${post.is_published ? 'is-live' : 'is-draft'}`}
-              onClick={() => handleTogglePublish(post.slug, post.is_published)}
-            >
-              {post.is_published ? 'Live' : 'Publish'}
-            </button>
+            {/* --- HEADER SECTION: Protects Title from Button --- */}
+            <div className="admin-post-header" style={{ 
+              position: 'relative', 
+              paddingRight: '85px', // This creates the "Safety Zone" for the button
+              minHeight: '40px'
+            }}>
+              <h2 style={{ 
+                margin: 0, 
+                fontSize: '1.5rem', 
+                lineHeight: '1.3',
+                wordWrap: 'break-word' // Forces long words to wrap
+              }}>
+                {post.title}
+              </h2>
 
-            <h2>{post.title}</h2>
+              <button 
+                className={`btn-status-glow ${post.is_published ? 'is-live' : 'is-draft'}`}
+                onClick={() => handleTogglePublish(post.slug, post.is_published)}
+                style={{ 
+                  position: 'absolute', 
+                  right: 0, 
+                  top: 0,
+                  margin: 0 
+                }}
+              >
+                {post.is_published ? 'Live' : 'Publish'}
+              </button>
+            </div>
 
-            {!post.is_published && (
-              <span className="draft-indicator">
-                • Draft
-              </span>
-            )}
-            <p className="post-meta">{post.read_time ?? "–"} min read</p>
+            {/* --- META SECTION --- */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
+              <p className="post-meta" style={{ margin: 0 }}>
+                {post.read_time ?? "–"} min read
+              </p>
+              {!post.is_published && (
+                <span className="draft-indicator" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>
+                  • Draft
+                </span>
+              )}
+            </div>
 
-            <div className="admin-actions">
+            {/* --- ACTIONS SECTION --- */}
+            <div className="admin-actions" style={{ marginTop: '1.5rem' }}>
               <Link to={`/admin/edit/${post.slug}`} className="btn-moonlight-action">
                 Edit
               </Link>
